@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="./assets/css/reset.css" />
     <link rel="stylesheet" href="./assets/css/style.css" />
 
     <title>Document</title>
@@ -19,12 +19,12 @@
       <aside>
         <h2>Search for a City:</h2>
         <form>
-          <input id="cityInput" type="text">
-          <button type="submit">Search</button>
+          <input id="cityInput" type="text" />
+          <button id="searchBtn" type="submit">Search</button>
         </form>
         <ul>
-          <li class="historyDisp">Atlanta</li>
-          <li class="historyDisp">Denver</li>
+          <li class="historyDisp"><a id="historyLink" href="">Atlanta</a></li>
+          <li class="historyDisp"><a id="historyLink" href="">Denver</a></li>
         </ul>
       </aside>
       <!-- main section -->
@@ -37,19 +37,17 @@
         </article>
         <article id="futureDisp">
           <h2>5-Day Forecast:</h2>
-          <div class="container">
-            <div class="card">.</div>
-            <div class="card">.</div>
-            <div class="card">.</div>
-            <div class="card">.</div>
-            <div class="card">.</div>
-          </div>
+          <ul id="ForecastList" class="container">
+            <li class="card">.</li>
+            <li class="card">.</li>
+            <li class="card">.</li>
+            <li class="card">.</li>
+            <li class="card">.</li>
+          </ul>
         </article>
       </section>
     </main>
 
-
-    
     <script src="./assets/js/script.js"></script>
   </body>
 </html>

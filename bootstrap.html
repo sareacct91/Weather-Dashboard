@@ -45,7 +45,9 @@
                   />
                 </div>
                 <!-- submit button -->
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button id="searchBtn" type="submit" class="btn btn-primary">
+                  Submit
+                </button>
               </form>
             </div>
             <!-- history list -->
@@ -63,20 +65,20 @@
           </div>
         </aside>
         <!-- section -->
-        <section class="col-9">
+        <section class="col-9 d-none">
           <div class="row">
             <!-- current weather -->
             <article id="currentDisp" class="col-12 text-white bg-secondary">
               <h2 id="cityDisplay">Test (9/13/2022) *</h2>
-              <p>Temp: 76.62*F</p>
-              <p>Wind: 8.42 MPH</p>
-              <p>Humidity: 44 %</p>
+              <p>Temp:</p>
+              <p>Wind:</p>
+              <p>Humidity:</p>
             </article>
             <!-- future weather -->
             <article class="col-12">
               <h2>5-Day Forecast:</h2>
               <!-- 5 cards, generate with js -->
-              <div id="fiveCardsDisp" class="row">
+              <div id="ForecastList" class="row">
                 <div class="card bg-dark text-white" style="width: 18rem">
                   <div class="card-body">
                     <h5 class="card-title">Card title</h5>
@@ -92,6 +94,7 @@
       </div>
     </main>
 
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.10/dayjs.min.js"></script>
     <script src="./assets/js/script.js"></script>
   </body>
 </html>
