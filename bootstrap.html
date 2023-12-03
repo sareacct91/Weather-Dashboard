@@ -62,26 +62,12 @@
         <section class="col-9 d-none">
           <div class="row">
             <!-- current weather -->
-            <article id="currentDisp" class="col-12 text-white bg-secondary">
-              <h2 id="cityDisplay">Test (9/13/2022) *</h2>
-              <p>Temp:</p>
-              <p>Wind:</p>
-              <p>Humidity:</p>
-            </article>
+            <article id="currentDisp" class="col-12 text-white bg-secondary"></article>
             <!-- future weather -->
             <article class="col-12">
               <h2>5-Day Forecast:</h2>
               <!-- 5 cards, generate with js -->
-              <div id="ForecastList" class="row">
-                <div class="card bg-dark text-white" style="width: 18rem">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Temp: 60.55 *F</p>
-                    <p class="card-text">Wind: 3.94 MPH</p>
-                    <p class="card-text">Humidity: 63%</p>
-                  </div>
-                </div>
-              </div>
+              <ul id="forecastList" class="row"></ul>
             </article>
           </div>
         </section>
