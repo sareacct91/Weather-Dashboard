@@ -6,17 +6,44 @@ let citiesObjArr = JSON.parse(localStorage.getItem("city")) || [];
 //#endregion Global
 
 //#region functions
-function displayHistory() {}
+function displayHistory() {
+  const historyDispEl = document.querySelector("#historyDisp");
+  historyDispEl.innerHTML = "";
+
+  // Loop through all the cities in the history(citiesObjArr)
+  citiesObjArr.forEach((geoLocation) => {
+    // Get the city name without spaces
+    const cityName = geoLocation.name.split(' ').join('');
+
+    // "Create" an <li> with a nested <a> element
+    const htmlStr = `<li class="list-group-item">
+    <a id="${cityName}" class="card-link">${geoLocation.name}</a>
+    <button id="delete${cityName}">Delete</button></li>`;
+    // Add the created element to the page
+    historyDispEl.insertAdjacentHTML('beforeend', htmlStr);
+
+    // eventlistener for each <a> tag to display the weather data of that city
+    document.querySelector(`#${cityName}`).addEventListener("click", () => {
+      getCurrentWeather(geoLocation);
+      getWeatherForecast(geoLocation);
+    });
+    // eventListener for the delete button for the city
+    const deleteBtn = document.querySelector(`#delete${cityName}`);
+    deleteBtn.addEventListener("click", () => {
+      deleteBtn.parentElement.remove();
+    })
+  });
+}
 
 function displayCurrentWeather(currentWeather) {
-  document.querySelector("section").classList.toggle("d-none");
+  document.querySelector("section").classList.remove("d-none");
   const currentWeatherDispEl = document.querySelector("#currentDisp");
   const h1El = currentWeatherDispEl.children[0];
   const tempEl = currentWeatherDispEl.children[1];
   const windEl = currentWeatherDispEl.children[2];
   const HumidityEl = currentWeatherDispEl.children[3];
 
-  console.log(currentWeather);
+  // console.log(currentWeather);
   const calTime = dayjs.unix(currentWeather.dt).format(`(M/D/YYYY)`);
   const iconUrl = `https://openweathermap.org/img/wn/${currentWeather.weather[0].icon}@2x.png`;
 
@@ -47,7 +74,7 @@ async function getGeoLocation(inputArr) {
 
 // get weather for the current city and display
 async function getCurrentWeather(geoLocation) {
-  let { lat, lon } = geoLocation[0];
+  let { lat, lon } = geoLocation;
   // API call for current weather data
   const currentAPIurl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APIKEY_OPENWEATHER}&units=imperial`;
 
@@ -62,12 +89,13 @@ async function getWeatherForecast(geoLocation) {}
 //#endregion functions
 
 //#region eventListeners
-document.querySelector("#searchBtn")
-  .addEventListener("click", async (event) => {
+document.querySelector("#userInput")
+  .addEventListener("submit", async (event) => {
+    // Stop default form action
     event.preventDefault();
 
-    const cityInputEl = document.querySelector("#cityInput");
     // Get user input
+    const cityInputEl = document.querySelector("#cityInput");
     const inputArr = cityInputEl.value.split(", ");
 
     // exit out of the function if user dind't put in a city name
@@ -76,13 +104,22 @@ document.querySelector("#searchBtn")
       return;
     }
 
-    const geoLocation = await getGeoLocation(inputArr);
+    // Get the geo location of the selected city
+    let geoLocation = await getGeoLocation(inputArr);
+    geoLocation = geoLocation[0];
 
+    // Get the weather information for the city
     getCurrentWeather(geoLocation);
     getWeatherForecast(geoLocation);
 
     // add city to history list and save to localstorage
     citiesObjArr.push(geoLocation);
     localStorage.setItem("city", JSON.stringify(citiesObjArr));
+    displayHistory();
   });
 //#endregion eventListeners
+
+// Init on DOM ready
+(onDOMContentLoaded = () => {
+  displayHistory();
+})();
