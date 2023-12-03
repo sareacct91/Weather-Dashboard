@@ -14,40 +14,27 @@
       <h1>Weather Dashboard</h1>
     </header>
 
-    <main class="container">
+    <main class="container row justify-center align-start w-10">
       <!-- aside -->
-      <aside>
+      <aside class="display flex-auto">
         <h2>Search for a City:</h2>
-        <form>
+        <form id="userInput">
           <input id="cityInput" type="text" />
           <button id="searchBtn" type="submit">Search</button>
         </form>
-        <ul>
-          <li class="historyDisp"><a id="historyLink" href="">Atlanta</a></li>
-          <li class="historyDisp"><a id="historyLink" href="">Denver</a></li>
-        </ul>
+        <ul id="historyDisp"></ul>
       </aside>
       <!-- main section -->
-      <section>
-        <article id="currentDisp">
-          <h2 id="cityDisplay">Test (9/13/2022) *</h2>
-          <p>Temp: 76.62*F</p>
-          <p>Wind: 8.42 MPH</p>
-          <p>Humidity: 44 %</p>
-        </article>
-        <article id="futureDisp">
+      <section class="column align-center justify-center flex-auto">
+        <article id="currentDisp" class="display w-10"></article>
+        <article id="futureDisp" class="display w-10">
           <h2>5-Day Forecast:</h2>
-          <ul id="ForecastList" class="container">
-            <li class="card">.</li>
-            <li class="card">.</li>
-            <li class="card">.</li>
-            <li class="card">.</li>
-            <li class="card">.</li>
-          </ul>
+          <ul id="forecastList" class="container"></ul>
         </article>
       </section>
     </main>
 
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.10/dayjs.min.js"></script>
     <script src="./assets/js/script.js"></script>
   </body>
 </html>
