@@ -1,8 +1,41 @@
 :root {
   --aside-width: 100%;
   --section-width: 100%;
-  --futureDisp-height: 50em;
+  --futureDisp-height: 40em;
   --currentDisp-height: 25em;
+  --image-bg-body1: url(https://usagif.com/wp-content/uploads/rainy-10.gif);
+  --image-bg-body2: url(https://pixabay.com/gifs/get/geacaad37570d8ddcb71d83cf5931d2fec84686bf249735383d6151b4713766def64306b9dbb8d6de0ddb153361c47f77.gif);
+}
+
+/* Utilities Classes */
+.row {
+  display: flex;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+}
+.justify-center {
+  justify-content: center;
+}
+.align-center {
+  align-items: center;
+}
+.align-start {
+  align-items: flex-start;
+}
+.flex-auto {
+  flex: 0 0 auto;
+}
+.w-10 {
+  width: 100%;
+}
+
+/* Classes */
+body {
+  background-image: var(--image-bg-body1);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 header {
@@ -12,42 +45,17 @@ header {
 }
 
 .container {
-  width: 100%;
-  justify-content: center;
-  align-items: flex-start;
-  display: flex;
-  flex-wrap: wrap;
+  padding: 1em;
+  gap: 1em;
 }
 
 aside {
-  flex: 0 0 auto;
   width: var(--aside-width);
-  height: 785px;
-  background: #A29B60;
 }
 
 section {
-  flex: 0 0 auto;
   width: var(--section-width);
-  align-self: stretch;
-  background: #FE7F7F;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  display: flex;
-}
-
-#currentDisp {
-  width: 100%;
-  height: var(--currentDisp-height);
-  margin: 1em;
-  background: linear-gradient(0deg, #00DDA8 0%, #00DDA8 100%), linear-gradient(0deg, #00DDA8 0%, #00DDA8 100%);
-}
-
-#futureDisp {
-  width: 100%;
-  height: var(--futureDisp-height);
-  background: #003EDD;  
+  gap: 1em;
 }
 
 .card {
@@ -56,9 +64,25 @@ section {
   border: 1px solid greenyellow;
 }
 
+.display {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.453);
+  border-radius: 2em;
+  padding: 2em;
+}
+
+#currentDisp {
+  height: var(--currentDisp-height);
+}
+
+#futureDisp {
+  width: 100%;
+  height: var(--futureDisp-height);
+}
+
 @media screen and (width >= 700px) {
   :root {
-    --aside-width: min(25%, 35em);
+    --aside-width: min(25%, 20em);
     --section-width: calc(100% - var(--aside-width));
   }
  }
