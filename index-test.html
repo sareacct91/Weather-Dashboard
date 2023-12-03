@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="./assets/css/reset.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <h1>Weather Dashboard</h1>
+    </header>
+
+    <main class="container">
+      <!-- aside -->
+      <aside>
+        <h2>Search for a City:</h2>
+        <form>
+          <input id="cityInput" type="text" />
+          <button id="searchBtn" type="submit">Search</button>
+        </form>
+        <ul>
+          <li class="historyDisp"><a id="historyLink" href="">Atlanta</a></li>
+          <li class="historyDisp"><a id="historyLink" href="">Denver</a></li>
+        </ul>
+      </aside>
+      <!-- main section -->
+      <section>
+        <article id="currentDisp">
+          <h2 id="cityDisplay">Test (9/13/2022) *</h2>
+          <p>Temp: 76.62*F</p>
+          <p>Wind: 8.42 MPH</p>
+          <p>Humidity: 44 %</p>
+        </article>
+        <article id="futureDisp">
+          <h2>5-Day Forecast:</h2>
+          <ul id="ForecastList" class="container">
+            <li class="card">.</li>
+            <li class="card">.</li>
+            <li class="card">.</li>
+            <li class="card">.</li>
+            <li class="card">.</li>
+          </ul>
+        </article>
+      </section>
+    </main>
+
+    <script src="./assets/js/script.js"></script>
+  </body>
+</html>
