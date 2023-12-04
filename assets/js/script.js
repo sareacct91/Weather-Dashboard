@@ -123,6 +123,10 @@ async function getGeoLocation(inputArr) {
 
   // Try catch block
   try {
+    if (!geoAPIurl) {
+      throw new Error("No geoUrl");
+    }
+
     let response = await fetch(geoAPIurl);
     response = await response.json();
     // If the returned response is an empty array i.e. not a valid city, throw an error
@@ -133,7 +137,7 @@ async function getGeoLocation(inputArr) {
     return response;
   } catch (error) {
     console.log(error);
-    return "error";
+    return String(error);
   }
 }
 //#endregion functions
@@ -161,8 +165,9 @@ document
     let geoLocation = await getGeoLocation(inputArr);
 
     // Error checking for geo data
-    if (geoLocation === "error") {
+    if (typeof geoLocation === "string") {
       alert("Please input a valid city name or US zipcode");
+      console.log(geoLocation);
       return;
     } else {
       // geoLocation is an arry if user input city name, an object if zipcode
