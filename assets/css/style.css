@@ -1,8 +1,8 @@
 :root {
   --aside-width: 100%;
   --section-width: 100%;
-  --futureDisp-height: 40em;
   --currentDisp-height: 17em;
+  --futureDisp-height: 30em;
   --image-bg-body1: url(https://usagif.com/wp-content/uploads/rainy-10.gif);
   --image-bg-body2: url(https://pixabay.com/gifs/get/geacaad37570d8ddcb71d83cf5931d2fec84686bf249735383d6151b4713766def64306b9dbb8d6de0ddb153361c47f77.gif);
 }
@@ -17,6 +17,9 @@
 }
 .justify-center {
   justify-content: center;
+}
+.justify-between {
+  justify-content: space-between;
 }
 .align-center {
   align-items: center;
@@ -41,7 +44,10 @@ body {
 header {
   width: 100%; 
   height: 90px; 
-  background: #38C73E;
+  font-size: 3em;
+  color: white;
+  text-shadow: 0 0 8px #ff0000;
+  text-align: center;
 }
 
 aside {
@@ -68,10 +74,15 @@ section {
   display: flex;
   justify-content: space-between;
   margin-top: 1em;
+  list-style: none;
 }
 
 .history-link {
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.history-link:hover {
+  box-shadow: inset 0px 0px 8px #bbbbbb;
 }
 
 .display {
