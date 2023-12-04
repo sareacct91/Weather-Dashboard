@@ -1,6 +1,6 @@
 // Global Variable
 const APIKEY_OPENWEATHER = "32b2a7c9028fc50e67a531e7f54cb096";
-let citiesObjArr = JSON.parse(localStorage.getItem("city")) || [];
+let geoLocationArr = JSON.parse(localStorage.getItem("city")) || [];
 
 //#region functions
 function renderHistory() {
@@ -10,14 +10,24 @@ function renderHistory() {
   historyDispEl.innerHTML = "";
 
   // Loop through all the cities in the history(citiesObjArr)
-  citiesObjArr.forEach((geoLocation, i) => {
+  geoLocationArr.forEach((geoLocation, i) => {
     // Get the city name without spaces
     const cityName = geoLocation.name.split(" ").join("");
 
-    // "Create" an <li> with a nested <a> element
-    const htmlStr = `<li class="history-list">
-    <a id="${cityName}-${i}" class="history-link">${geoLocation.name}</a>
-    <button id="delete-${cityName}-${i}">Delete</button></li>`;
+    // "Create" a <li> with a nested <a> and <button> element
+    let htmlStr;
+
+    if (geoLocation.zip) {
+      htmlStr = `<li class="history-list">
+      <a id="${cityName}-${i}" class="history-link">${geoLocation.name}, ${geoLocation.zip}</a>
+      <button id="delete-${cityName}-${i}">Delete</button></li>`;
+    } else {
+      htmlStr = `<li class="history-list">
+      <a id="${cityName}-${i}" class="history-link">${geoLocation.name}, ${geoLocation.state}</a>
+      <button id="delete-${cityName}-${i}">Delete</button></li>`;
+    }
+
+    
     // "Append" the elements
     historyDispEl.insertAdjacentHTML("beforeend", htmlStr);
 
@@ -37,8 +47,8 @@ function renderHistory() {
       // Remove the parent li element
       deleteBtn.parentElement.remove();
       // Delete the element from the array and update localStorage
-      citiesObjArr.splice(i, 1);
-      localStorage.setItem("city", JSON.stringify(citiesObjArr));
+      geoLocationArr.splice(i, 1);
+      localStorage.setItem("city", JSON.stringify(geoLocationArr));
       // Re-render the list to match the index again
       renderHistory();
     });
@@ -109,40 +119,51 @@ async function getWeatherData(lat, lon) {
 }
 
 // API call for city geo location
-async function getGeoLocation(inputArr) {
-  const [cityId, stateCode] = inputArr;
-  let geoAPIurl = "";
-
-  // check for zip code input
-  if (!isNaN(cityId) && cityId.length === 5) {
-    geoAPIurl = `https://api.openweathermap.org/geo/1.0/zip?zip=${cityId},US&appid=${APIKEY_OPENWEATHER}`;
-    // normal with city name and state code
-  } else if (isNaN(cityId)) {
-    geoAPIurl = `https://api.openweathermap.org/geo/1.0/direct?q=${cityId}&limit=1&appid=${APIKEY_OPENWEATHER}`;
-  }
-
-  // Try catch block
+async function getGeoLocation(geoAPIurl) {
   try {
-    // Error if no url is given
-    if (!geoAPIurl) {
-      throw new Error("No geoUrl");
-    }
-
-    let response = await fetch(geoAPIurl);
-    response = await response.json();
+    const response = await fetch(geoAPIurl);
+    const data = await response.json();
 
     // If the returned response is an empty array i.e. not a valid city, throw an error
-    if (response.length === 0) {
-      throw new Error("empty array");
+    if (data.length === 0) {
+      throw new Error("Empty array");
     }
-    // return response if everything is good
-    return response;
+
+    // geoLocation is an arry if user input city name, an object if zipcode
+    const geoLocation = data[0] || data;
+
+    // add city to history list and save to localstorage
+    geoLocationArr.push(geoLocation);
+    localStorage.setItem("city", JSON.stringify(geoLocationArr));
+    renderHistory();
+
+    // Get the current and weather forcast data
+    const { lat, lon } = geoLocation;
+    getWeatherData(lat, lon);
 
     // Catch the thrown errors
   } catch (error) {
     console.log(error);
-    return String(error);
+    alert('Invalid city! \n\nPlease try again.');
   }
+}
+
+// Create the url for the openWeather Geo API
+function generateGeoUrl(inputObj) {
+  const {cityName, stateCode, zipCode, countryCode: countryCode = 'US' } = inputObj;
+  let geoAPIurl = '';
+
+  if (zipCode) {
+    geoAPIurl = `https://api.openweathermap.org/geo/1.0/zip?zip=${zipCode},${countryCode}&appid=${APIKEY_OPENWEATHER}`;
+
+    // normal with city name and state code
+  } else if (cityName) {
+    geoAPIurl = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName},${stateCode},${countryCode}&limit=1&appid=${APIKEY_OPENWEATHER}`;
+  }
+
+  console.log(geoAPIurl)
+
+  getGeoLocation(geoAPIurl);
 }
 //#endregion functions
 
@@ -156,37 +177,42 @@ document
     // DOM selector
     const cityInputEl = document.querySelector("#cityInput");
 
+    // Get user input and reset the field
+    const userInput = cityInputEl.value.trim();
+    cityInputEl.value = "";
+
     // exit out of the function if user dind't put in a city name
-    if (!cityInputEl.value) {
+    if (!userInput) {
       alert("Please type in a city name");
       return;
     }
-    // Get user input and reset the input field
-    const inputArr = cityInputEl.value.trim().split(", ");
-    cityInputEl.value = "";
+    
+    // Convert userinput into an object data
+    const inputObj = {};
 
-    // Get the geo location of the selected city
-    let geoLocation = await getGeoLocation(inputArr);
+    // If the user only put in a zip code: 90803
+    if (isNaN(userInput)) {
+      let tempArr = userInput.split(',');
+      inputObj.cityName = tempArr.shift();
 
-    // Error checking for geo data
-    if (typeof geoLocation === "string") {
-      alert("Please input a valid city name or US zipcode");
-      console.log(geoLocation);
-      return;
+      tempArr = tempArr.join('').trim().split(' ');
+
+      inputObj.stateCode = tempArr.shift();
+      inputObj.zipCode = tempArr.shift();
+      
+      // If the user put in city name and state: Long Beach, CA 90803
+    } else if (!isNaN(userInput) && userInput.length === 5) {
+      inputObj.zipCode = userInput;
+
     } else {
-      // geoLocation is an arry if user input city name, an object if zipcode
-      geoLocation = geoLocation[0] || geoLocation;
+      alert('Invalid zip code');
+      return;
     }
 
-    // Get the lat and lon from geoLocation data
-    const { lat, lon } = geoLocation;
-    // Get the weather information using lat and lon
-    getWeatherData(lat, lon);
+    console.log(inputObj);
 
-    // add city to history list and save to localstorage
-    citiesObjArr.push(geoLocation);
-    localStorage.setItem("city", JSON.stringify(citiesObjArr));
-    renderHistory();
+    // Get the geo location of the selected city
+    generateGeoUrl(inputObj);
   });
 //#endregion eventListeners
 
