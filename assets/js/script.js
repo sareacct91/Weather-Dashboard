@@ -1,6 +1,6 @@
 // Global Variable
 const APIKEY_OPENWEATHER = "32b2a7c9028fc50e67a531e7f54cb096";
-let citiesObjArr = JSON.parse(localStorage.getItem('city')) || [];
+let citiesObjArr = JSON.parse(localStorage.getItem("city")) || [];
 
 //#region functions
 function renderHistory() {
@@ -12,34 +12,36 @@ function renderHistory() {
   // Loop through all the cities in the history(citiesObjArr)
   citiesObjArr.forEach((geoLocation, i) => {
     // Get the city name without spaces
-    const cityName = geoLocation.name.split(' ').join('');
+    const cityName = geoLocation.name.split(" ").join("");
 
     // "Create" an <li> with a nested <a> element
     const htmlStr = `<li class="list-group-item">
-    <a id="city-${i}" class="card-link">${geoLocation.name}</a>
-    <button id="delete-${i}">Delete</button></li>`;
+    <a id="${cityName}-${i}" class="card-link">${geoLocation.name}</a>
+    <button id="delete-${cityName}-${i}">Delete</button></li>`;
     // "Append" the elements
-    historyDispEl.insertAdjacentHTML('beforeend', htmlStr);
+    historyDispEl.insertAdjacentHTML("beforeend", htmlStr);
 
     // eventlistener for each <a> tag to display the weather data of that city
-    document.querySelector(`#city-${i}`).addEventListener("click", () => {
-      // Get the weather information for the city
-      const { lat, lon } = geoLocation;
-      getWeatherData(lat, lon);
-    });
+    document
+      .querySelector(`#${cityName}-${i}`)
+      .addEventListener("click", () => {
+        // Get the weather information for the city
+        const { lat, lon } = geoLocation;
+        getWeatherData(lat, lon);
+      });
 
     // eventListener for the delete button for the city
-    const deleteBtn = document.querySelector(`#delete-${i}`);
+    const deleteBtn = document.querySelector(`#delete-${cityName}-${i}`);
 
     deleteBtn.addEventListener("click", () => {
       // Remove the parent li element
       deleteBtn.parentElement.remove();
       // Delete the element from the array and update localStorage
       citiesObjArr.splice(i, 1);
-      localStorage.setItem('city', JSON.stringify(citiesObjArr));
+      localStorage.setItem("city", JSON.stringify(citiesObjArr));
       // Re-render the list to match the index again
       renderHistory();
-    })
+    });
   });
 }
 
@@ -53,8 +55,7 @@ function renderCurrentWeather(currentWeatherData) {
   const iconUrl = `https://openweathermap.org/img/wn/${currentWeatherData.weather[0].icon}@2x.png`;
 
   // "Create" html elements
-  const htmlStr =
-  `<h2>${currentWeatherData.name} ${calTime} <i class="icon"><img src="${iconUrl}"></i></h2>
+  const htmlStr = `<h2>${currentWeatherData.name} ${calTime} <i class="icon"><img src="${iconUrl}"></i></h2>
   <p>Temp: ${currentWeatherData.main.temp}°F</p>
   <p>Wind: ${currentWeatherData.wind.speed} MP</p>
   <p>Humidity: ${currentWeatherData.main.humidity} %</p>`;
@@ -67,7 +68,7 @@ function renderForecastWeather(forecastWeatherData) {
   const currentWeatherDispEl = document.querySelector("#forecastList");
 
   // Reset the list
-  currentWeatherDispEl.innerHTML = '';
+  currentWeatherDispEl.innerHTML = "";
   // Loop through each day of the 5 days forcast
   for (let i = 0; i < forecastWeatherData.list.length; i += 8) {
     const dayObj = forecastWeatherData.list[i];
@@ -81,7 +82,7 @@ function renderForecastWeather(forecastWeatherData) {
     <p class="card-text">Temp: ${dayObj.main.temp}°F</p>
     <p class="card-text">Wind: ${dayObj.wind.speed} MPH</p>
     <p class="card-text">Humidity: ${dayObj.main.humidity} %</p>
-  </div></li>`
+  </div></li>`;
     // "append" the crated li element to the list
     currentWeatherDispEl.innerHTML += htmlStr;
   }
@@ -126,21 +127,20 @@ async function getGeoLocation(inputArr) {
     response = await response.json();
     // If the returned response is an empty array i.e. not a valid city, throw an error
     if (response.length === 0) {
-      throw new Error('empty array')
+      throw new Error("empty array");
     }
     // return response if everything is good
     return response;
-
   } catch (error) {
     console.log(error);
-    return 'error';
+    return "error";
   }
-  
 }
 //#endregion functions
 
 //#region eventListeners
-document.querySelector("#userInput")
+document
+  .querySelector("#userInput")
   .addEventListener("submit", async (event) => {
     // Stop default form action
     event.preventDefault();
@@ -154,14 +154,14 @@ document.querySelector("#userInput")
       return;
     }
     // Get user input and reset the input field
-    const inputArr = cityInputEl.value.split(", ");
-    cityInputEl.value = '';
+    const inputArr = cityInputEl.value.trime().split(", ");
+    cityInputEl.value = "";
 
     // Get the geo location of the selected city
     let geoLocation = await getGeoLocation(inputArr);
 
     // Error checking for geo data
-    if (geoLocation === 'error') {
+    if (geoLocation === "error") {
       alert("Please input a valid city name or US zipcode");
       return;
     } else {
