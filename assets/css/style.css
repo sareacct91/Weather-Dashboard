@@ -64,9 +64,13 @@ section {
   border: 1px solid greenyellow;
 }
 
+.card-link {
+  cursor: pointer;
+}
+
 .display {
   color: white;
-  background-color: rgba(0, 0, 0, 0.453);
+  background-color: rgba(0, 0, 0, 0.686);
   border-radius: 2em;
   padding: 2em;
 }
