@@ -123,18 +123,22 @@ async function getGeoLocation(inputArr) {
 
   // Try catch block
   try {
+    // Error if no url is given
     if (!geoAPIurl) {
       throw new Error("No geoUrl");
     }
 
     let response = await fetch(geoAPIurl);
     response = await response.json();
+
     // If the returned response is an empty array i.e. not a valid city, throw an error
     if (response.length === 0) {
       throw new Error("empty array");
     }
     // return response if everything is good
     return response;
+
+    // Catch the thrown errors
   } catch (error) {
     console.log(error);
     return String(error);
