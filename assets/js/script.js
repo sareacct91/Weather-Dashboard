@@ -115,10 +115,10 @@ async function getGeoLocation(inputArr) {
 
   // check for zip code input
   if (!isNaN(cityId) && cityId.length === 5) {
-    geoAPIurl = `http://api.openweathermap.org/geo/1.0/zip?zip=${cityId},US&appid=${APIKEY_OPENWEATHER}`;
+    geoAPIurl = `https://api.openweathermap.org/geo/1.0/zip?zip=${cityId},US&appid=${APIKEY_OPENWEATHER}`;
     // normal with city name and state code
   } else if (isNaN(cityId)) {
-    geoAPIurl = `http://api.openweathermap.org/geo/1.0/direct?q=${cityId}&limit=1&appid=${APIKEY_OPENWEATHER}`;
+    geoAPIurl = `https://api.openweathermap.org/geo/1.0/direct?q=${cityId}&limit=1&appid=${APIKEY_OPENWEATHER}`;
   }
 
   // Try catch block
