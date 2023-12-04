@@ -2,7 +2,7 @@
   --aside-width: 100%;
   --section-width: 100%;
   --futureDisp-height: 40em;
-  --currentDisp-height: 25em;
+  --currentDisp-height: 17em;
   --image-bg-body1: url(https://usagif.com/wp-content/uploads/rainy-10.gif);
   --image-bg-body2: url(https://pixabay.com/gifs/get/geacaad37570d8ddcb71d83cf5931d2fec84686bf249735383d6151b4713766def64306b9dbb8d6de0ddb153361c47f77.gif);
 }
@@ -44,11 +44,6 @@ header {
   background: #38C73E;
 }
 
-.container {
-  padding: 1em;
-  gap: 1em;
-}
-
 aside {
   width: var(--aside-width);
 }
@@ -58,13 +53,24 @@ section {
   gap: 1em;
 }
 
+.container {
+  padding: 1em;
+  gap: 1em;
+}
+
 .card {
   width: 20%;
   background-color: grey;
   border: 1px solid greenyellow;
 }
 
-.card-link {
+.history-list {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1em;
+}
+
+.history-link {
   cursor: pointer;
 }
 
@@ -84,9 +90,13 @@ section {
   height: var(--futureDisp-height);
 }
 
-@media screen and (width >= 700px) {
+@media screen and (width >= 800px) {
   :root {
-    --aside-width: min(25%, 20em);
+    --aside-width: 20em;
     --section-width: calc(100% - var(--aside-width));
+  }
+
+  .container {
+    flex-direction: row;
   }
  }

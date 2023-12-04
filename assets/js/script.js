@@ -15,8 +15,8 @@ function renderHistory() {
     const cityName = geoLocation.name.split(" ").join("");
 
     // "Create" an <li> with a nested <a> element
-    const htmlStr = `<li class="list-group-item">
-    <a id="${cityName}-${i}" class="card-link">${geoLocation.name}</a>
+    const htmlStr = `<li class="history-list">
+    <a id="${cityName}-${i}" class="history-link">${geoLocation.name}</a>
     <button id="delete-${cityName}-${i}">Delete</button></li>`;
     // "Append" the elements
     historyDispEl.insertAdjacentHTML("beforeend", htmlStr);
