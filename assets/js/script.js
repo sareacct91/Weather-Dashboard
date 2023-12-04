@@ -154,7 +154,7 @@ document
       return;
     }
     // Get user input and reset the input field
-    const inputArr = cityInputEl.value.trime().split(", ");
+    const inputArr = cityInputEl.value.trim().split(", ");
     cityInputEl.value = "";
 
     // Get the geo location of the selected city
