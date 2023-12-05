@@ -58,10 +58,10 @@ function renderHistory() {
 // Display the weather forcast data on the page
 function renderForecastWeather(forecastWeatherData) {
   // DOM selectors
-  const currentWeatherDispEl = document.querySelector("#forecastList");
+  const weatherForcastDispEl = document.querySelector("#forecastList");
 
   // Reset the list
-  currentWeatherDispEl.innerHTML = "";
+  weatherForcastDispEl.innerHTML = "";
   // Loop through each day of the 5 days forcast
   for (let i = 0; i < forecastWeatherData.list.length; i += 8) {
     const dayObj = forecastWeatherData.list[i];
@@ -77,7 +77,7 @@ function renderForecastWeather(forecastWeatherData) {
     <p class="card-text">Humidity: ${dayObj.main.humidity} %</p>
   </div></li>`;
     // "append" the crated li element to the list
-    currentWeatherDispEl.innerHTML += htmlStr;
+    weatherForcastDispEl.innerHTML += htmlStr;
   }
 }
 
