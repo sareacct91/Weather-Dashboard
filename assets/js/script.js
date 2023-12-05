@@ -96,7 +96,7 @@ function renderCurrentWeather(currentWeatherData) {
   <p>Wind: ${currentWeatherData.wind.speed} MP</p>
   <p>Humidity: ${currentWeatherData.main.humidity} %</p>`;
   // "append" html elements
-  c 
+  currentWeatherDispEl.insertAdjacentHTML("beforeend",htmlStr); 
 }
 
 // get weather for the current city and display
