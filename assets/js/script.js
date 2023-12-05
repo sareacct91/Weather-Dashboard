@@ -55,24 +55,7 @@ function renderHistory() {
   });
 }
 
-// Display the current weather data on the page
-function renderCurrentWeather(currentWeatherData) {
-  // DOM selectors
-  const currentDispEl = document.querySelector("#currentDisp");
-
-  // Calculate time and icon url
-  const calTime = dayjs.unix(currentWeatherData.dt).format(`(M/D/YYYY)`);
-  const iconUrl = `https://openweathermap.org/img/wn/${currentWeatherData.weather[0].icon}@2x.png`;
-
-  // "Create" html elements
-  const htmlStr = `<h2>${currentWeatherData.name} ${calTime} <i class="icon"><img src="${iconUrl}"></i></h2>
-  <p>Temp: ${currentWeatherData.main.temp}°F</p>
-  <p>Wind: ${currentWeatherData.wind.speed} MP</p>
-  <p>Humidity: ${currentWeatherData.main.humidity} %</p>`;
-  // "append" html elements
-  currentDispEl.innerHTML = htmlStr;
-}
-
+// Display the weather forcast data on the page
 function renderForecastWeather(forecastWeatherData) {
   // DOM selectors
   const currentWeatherDispEl = document.querySelector("#forecastList");
@@ -97,6 +80,25 @@ function renderForecastWeather(forecastWeatherData) {
     currentWeatherDispEl.innerHTML += htmlStr;
   }
 }
+
+// Display the current weather data on the page
+function renderCurrentWeather(currentWeatherData) {
+  // DOM selectors
+  const currentDispEl = document.querySelector("#currentDisp");
+
+  // Calculate time and icon url
+  const calDate = dayjs.unix(currentWeatherData.dt).format(`(M/D/YYYY)`);
+  const iconUrl = `https://openweathermap.org/img/wn/${currentWeatherData.weather[0].icon}@2x.png`;
+
+  // "Create" html elements
+  const htmlStr = `<h2 class="row align-center">${currentWeatherData.name} ${calDate} <i class="icon"><img src="${iconUrl}" style="width: 4em"></i></h2>
+  <p>Temp: ${currentWeatherData.main.temp}°F</p>
+  <p>Wind: ${currentWeatherData.wind.speed} MP</p>
+  <p>Humidity: ${currentWeatherData.main.humidity} %</p>`;
+  // "append" html elements
+  c 
+}
+
 // get weather for the current city and display
 async function getWeatherData(lat, lon) {
   // API call for current weather data
@@ -190,7 +192,7 @@ document
     // Convert userinput into an object data
     const inputObj = {};
 
-    // If the user only put in a zip code: 90803
+    // If the user only put in a zip code: Long Beach, CA 90803
     if (isNaN(userInput)) {
       let tempArr = userInput.split(',');
       inputObj.cityName = tempArr.shift();
@@ -200,7 +202,7 @@ document
       inputObj.stateCode = tempArr.shift();
       inputObj.zipCode = tempArr.shift();
       
-      // If the user put in city name and state: Long Beach, CA 90803
+      // If the user put in city name and state: 90803
     } else if (!isNaN(userInput) && userInput.length === 5) {
       inputObj.zipCode = userInput;
 
