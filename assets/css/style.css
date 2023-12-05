@@ -1,7 +1,7 @@
 :root {
   --aside-width: 100%;
   --section-width: 100%;
-  --currentDisp-height: 17em;
+  --currentDisp-height: 13.5em;
   --futureDisp-height: 30em;
   --image-bg-body1: url(https://usagif.com/wp-content/uploads/rainy-10.gif);
   --image-bg-body2: url(https://pixabay.com/gifs/get/geacaad37570d8ddcb71d83cf5931d2fec84686bf249735383d6151b4713766def64306b9dbb8d6de0ddb153361c47f77.gif);
@@ -32,6 +32,9 @@
 }
 .w-10 {
   width: 100%;
+}
+.d-none {
+  display: none;
 }
 
 /* Classes */
