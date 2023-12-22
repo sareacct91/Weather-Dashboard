@@ -2,42 +2,39 @@
 
 ## Description
 
-.
+A weather application that provides current weather information and a 5-day forecast for a location in the United States.
 
 ## Deployed Application
 
-Click [here]() to access the deployed application.
+Click [here](https://sareacct91.github.io/Weather-Dashboard/) to access the deployed application.
 
 ## Usage
 
-.
+1. Search for a Location:
+
+    Type the name of a city or a zip code into the search bar and press Enter or click search
+
+2. View Current Weather:
+
+    The current weather details, including temperature, wind speed, and humidity, will be displayed.
+
+3. 5-Day Forecast:
+
+    Scroll down to view the 5-day weather forecast.
+
+4. Additional Notes:
+
+    The app is designed for U.S. locations only.
+
+![image of landing page](./assets/images/screen-shot/landing%20page.png)
+![image of search result](./assets/images/screen-shot/result.png)
 
 ## Features
 
-    .
+- **Search Location:** Type in the name of a city or a zip code to get weather information.
+- **Current Weather:** View the current temperature, weather conditions, and other relevant details.
+- **5-Day Forecast:** Plan ahead with a 5-day weather forecast.
 
+## Technologies Used
 
-
-Server-Side APIs Challenge: Weather Dashboard
-Third-party APIs allow developers to access their data and functionality by making requests with specific parameters to a URL. Developers are often tasked with retrieving data from another application's API and using it in the context of their own. Your challenge is to build a weather dashboard that will run in the browser and feature dynamically updated HTML and CSS.
-
-Use the 5 Day Weather ForecastLinks to an external site. to retrieve weather data for cities. The base URL should look like the following: https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}. After registering for a new API key, you may need to wait up to 2 hours for that API key to activate.
-
-HINT
-Using the 5 Day Weather Forecast API, you'll notice that you will need to pass in coordinates instead of just a city name. Using the OpenWeatherMap APIs, how could we retrieve geographical coordinates given a city name?
-
-You will use localStorage to store any persistent data. For more information on how to work with the OpenWeather API, refer to the Full-Stack Blog on how to use API keysLinks to an external site..
-
-
-
-
-Acceptance Criteria
-GIVEN a weather dashboard with form inputs
-WHEN I search for a city
-THEN I am presented with current and future conditions for that city and that city is added to the search history
-WHEN I view current weather conditions for that city
-THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, and the the wind speed
-WHEN I view future weather conditions for that city
-THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
-WHEN I click on a city in the search history
-THEN I am again presented with current and future conditions for that city
+> OpenWeatherMap API
