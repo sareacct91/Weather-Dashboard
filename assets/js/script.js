@@ -100,12 +100,19 @@ function renderCurrentWeather(currentWeatherData) {
     let bgImgUrl = '';
 
     switch (condition) {
-      // Clear
+      // Clear day
       case '01d':
       case '02d':
       case '03d':
       case '04d':
         bgImgUrl = 'https://pixabay.com/get/g2a3dfe5b450ee3d52f45da3dea0df75fb1900dd29010cbde2f666c466408673e4ffb96d3b8721f6fb1c60a8061f34cbf_1920.jpg';
+        break;
+      // Clear night
+      case '01n':
+      case '02n':
+      case '03n':
+      case '04n':
+        bgImgUrl = 'https://pixabay.com/get/g8f0f2ffe529e2fbe93c7b9de333ba62f03f7acf585bc8c46ed4612c1269cf9cb1d6e807f323a2095c97dee7619e3423535f4ae30bce9bb4071aba2653b3aa79c_1920.jpg';
         break;
       // Rain day
       case '09d':
