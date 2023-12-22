@@ -38,3 +38,7 @@ Click [here](https://sareacct91.github.io/Weather-Dashboard/) to access the depl
 ## Technologies Used
 
 > OpenWeatherMap API
+
+## Credits
+
+https://pixabay.com/
