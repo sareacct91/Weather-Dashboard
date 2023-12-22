@@ -106,14 +106,14 @@ function renderCurrentWeather(currentWeatherData) {
       case '02d':
       case '03d':
       case '04d':
-        bgImgUrl = 'https://pixabay.com/get/g2a3dfe5b450ee3d52f45da3dea0df75fb1900dd29010cbde2f666c466408673e4ffb96d3b8721f6fb1c60a8061f34cbf_1920.jpg';
+        bgImgUrl = './assets/images/cloudy.jpg';
         break;
       // Clear night
       case '01n':
       case '02n':
       case '03n':
       case '04n':
-        bgImgUrl = 'https://pixabay.com/get/g8f0f2ffe529e2fbe93c7b9de333ba62f03f7acf585bc8c46ed4612c1269cf9cb1d6e807f323a2095c97dee7619e3423535f4ae30bce9bb4071aba2653b3aa79c_1920.jpg';
+        bgImgUrl = './assets/images/clear-night.jpg';
         break;
       // Rain day
       case '09d':
@@ -123,29 +123,29 @@ function renderCurrentWeather(currentWeatherData) {
       // Rain night
       case '09n':
       case '10n':
-        bgImgUrl = 'https://pixabay.com/gifs/get/ga184b543fbea25b635c6846e2fa37243be0896d944e4e33c520adfc23d2c49505024f6463b7897f1eaaff7fac08e65ee_256.gif';
+        bgImgUrl = './assets/images/rain-night.gif';
         break;
       // Thunderstorm day & night
       case '11d':
       case '11n':
-        bgImgUrl = 'https://pixabay.com/get/gbf4c356792778e700465197a2c7e6156b5e80f47a0761b9fd78b38e6022e4b0e97b188b28b0b2d23ed00ad3aeec289c3.jpg';
+        bgImgUrl = './assets/images/lightning.jpg';
         break;
       // Snow day
       case '13d':
-        bgImgUrl = 'https://pixabay.com/get/g32dc5cbcc1b3a6f3a710e85d1b683334ae4258f3d25ec20e21d2ce3651ba87d2e14ba98158a053ecc173757f8c66d384_1920.jpg';
+        bgImgUrl = './assets/images/snow.jpg';
         break;
       // Snow night
       case '13n':
-        bgImgUrl = 'https://pixabay.com/get/g06a86a36427038537ee50af98a58ce4117ed9985d0b72683860687f3d1cb4b55cb56025557fe80a0edd298b15ce66230d6d0dc8264ccba91fe4de5a6d624cae5_1920.jpg';
+        bgImgUrl = './assets/images/snow-night.jpg';
         break;
       // Mist day & night
       case '50d':
       case '50n':
-        bgImgUrl = 'https://pixabay.com/get/g63f6b4ba9a8aa908ad0529fbdbc3765f994da2596fdfa8b17a5355661a9a3702317ff8da6c231a632798844232f2cdcc8429a99c7784b5aa106b13f595a8c465_1920.jpg';
+        bgImgUrl = './assets/images/mist.jpg';
         break;
     
       default:
-        bgImgUrl = 'https://pixabay.com/get/gcb5ae239d2650d56db2158bf6f3d176153e40c4d4c55c4a549afcd85952df44a4fb9196092b38f1271441368cb3749b342bdd444944ce7f77a054478ace96623_1920.jpg';
+        bgImgUrl = './assets/images/default.jpg';
         break;
     }
 

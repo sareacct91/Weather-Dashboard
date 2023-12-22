@@ -3,7 +3,7 @@
   --section-width: 100%;
   --currentDisp-height: max(13.5em, min-content);
   --futureDisp-height: max(30em, min-content);
-  --image-bg-body1: url(https://pixabay.com/get/gcb5ae239d2650d56db2158bf6f3d176153e40c4d4c55c4a549afcd85952df44a4fb9196092b38f1271441368cb3749b342bdd444944ce7f77a054478ace96623_1920.jpg);
+  --image-bg-body1: url('../images/default.jpg');
 }
 
 /* Utilities Classes */
