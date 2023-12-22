@@ -67,36 +67,100 @@ function renderForecastWeather(forecastWeatherData) {
     const dayObj = forecastWeatherData.list[i];
     // Calculate the time of the API call
     const calTime = dayjs.unix(dayObj.dt).format(`(M/D/YYYY)`);
+    const iconUrl = `https://openweathermap.org/img/wn/${dayObj.weather[0].icon}@2x.png`;
 
     // "Create" a li element for each day of the forcast
-    const htmlStr = `<li class="card bg-dark text-white" style="width: 18rem">
-  <div class="card-body">
-    <h5 class="card-title">${calTime}</h5>
-    <p class="card-text">Temp: ${dayObj.main.temp}°F</p>
-    <p class="card-text">Wind: ${dayObj.wind.speed} MPH</p>
-    <p class="card-text">Humidity: ${dayObj.main.humidity} %</p>
-  </div></li>`;
+    const htmlStr = `
+    <li class="card bg-dark text-white">
+      <div class="card-body">
+        <h3 class="card-title">${calTime}
+          <i class="icon"><img src="${iconUrl}" style="width: 4em"></i>
+        </h3>
+        <p class="card-text">Temp: ${dayObj.main.temp}°F</p>
+        <p class="card-text">Wind: ${dayObj.wind.speed} MPH</p>
+        <p class="card-text">Humidity: ${dayObj.main.humidity} %</p>
+      </div>
+    </li>`;
     // "append" the crated li element to the list
     weatherForcastDispEl.innerHTML += htmlStr;
   }
 }
+
+
 
 // Display the current weather data on the page
 function renderCurrentWeather(currentWeatherData) {
   // DOM selectors
   const currentDispEl = document.querySelector("#currentDisp");
 
+  console.log(currentWeatherData);
+  
+  const renderBgImg = (condition) => {
+    const bodyEl = document.querySelector('body');
+    let bgImgUrl = '';
+
+    switch (condition) {
+      // Clear
+      case '01d':
+      case '02d':
+      case '03d':
+      case '04d':
+        bgImgUrl = 'https://pixabay.com/get/g2a3dfe5b450ee3d52f45da3dea0df75fb1900dd29010cbde2f666c466408673e4ffb96d3b8721f6fb1c60a8061f34cbf_1920.jpg';
+        break;
+      // Rain day
+      case '09d':
+      case '10d':
+        bgImgUrl = 'https://usagif.com/wp-content/uploads/rainy-10.gif';
+        break;
+      // Rain night
+      case '09n':
+      case '10n':
+        bgImgUrl = 'https://pixabay.com/gifs/get/ga184b543fbea25b635c6846e2fa37243be0896d944e4e33c520adfc23d2c49505024f6463b7897f1eaaff7fac08e65ee_256.gif';
+        break;
+      // Thunderstorm day & night
+      case '11d':
+      case '11n':
+        bgImgUrl = 'https://pixabay.com/get/gbf4c356792778e700465197a2c7e6156b5e80f47a0761b9fd78b38e6022e4b0e97b188b28b0b2d23ed00ad3aeec289c3.jpg';
+        break;
+      // Snow day
+      case '13d':
+        bgImgUrl = 'https://pixabay.com/get/g32dc5cbcc1b3a6f3a710e85d1b683334ae4258f3d25ec20e21d2ce3651ba87d2e14ba98158a053ecc173757f8c66d384_1920.jpg';
+        break;
+      // Snow night
+      case '13n':
+        bgImgUrl = 'https://pixabay.com/get/g06a86a36427038537ee50af98a58ce4117ed9985d0b72683860687f3d1cb4b55cb56025557fe80a0edd298b15ce66230d6d0dc8264ccba91fe4de5a6d624cae5_1920.jpg';
+        break;
+      // Mist day & night
+      case '50d':
+      case '50n':
+        bgImgUrl = 'https://pixabay.com/get/g63f6b4ba9a8aa908ad0529fbdbc3765f994da2596fdfa8b17a5355661a9a3702317ff8da6c231a632798844232f2cdcc8429a99c7784b5aa106b13f595a8c465_1920.jpg';
+        break;
+    
+      default:
+        break;
+    }
+
+    // Set the background according to the weather condition
+  bodyEl.style.backgroundImage = `url(${bgImgUrl})`;
+  }
+
   // Calculate time and icon url
   const calDate = dayjs.unix(currentWeatherData.dt).format(`(M/D/YYYY)`);
   const iconUrl = `https://openweathermap.org/img/wn/${currentWeatherData.weather[0].icon}@2x.png`;
 
   // "Create" html elements
-  const htmlStr = `<h2 class="row align-center">${currentWeatherData.name} ${calDate} <i class="icon"><img src="${iconUrl}" style="width: 4em"></i></h2>
+  const htmlStr = `
+  <h2 class="row align-center">${currentWeatherData.name} ${calDate} 
+    <i class="icon"><img src="${iconUrl}" style="width: 4em"></i>
+  </h2>
   <p>Temp: ${currentWeatherData.main.temp}°F</p>
   <p>Wind: ${currentWeatherData.wind.speed} MP</p>
   <p>Humidity: ${currentWeatherData.main.humidity} %</p>`;
   // "append" html elements
   currentDispEl.innerHTML = htmlStr; 
+
+  // Render the background image according the weather condition
+  renderBgImg(currentWeatherData.weather[0].icon);
 }
 
 // get weather for the current city and display
