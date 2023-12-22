@@ -93,12 +93,13 @@ function renderCurrentWeather(currentWeatherData) {
   // DOM selectors
   const currentDispEl = document.querySelector("#currentDisp");
 
-  console.log(currentWeatherData);
-  
+  // Function to rendender the bg image
   const renderBgImg = (condition) => {
+    // DOM selector
     const bodyEl = document.querySelector('body');
-    let bgImgUrl = '';
 
+    // Select the bg image url
+    let bgImgUrl = '';
     switch (condition) {
       // Clear day
       case '01d':
@@ -144,6 +145,7 @@ function renderCurrentWeather(currentWeatherData) {
         break;
     
       default:
+        bgImgUrl = 'https://pixabay.com/get/gcb5ae239d2650d56db2158bf6f3d176153e40c4d4c55c4a549afcd85952df44a4fb9196092b38f1271441368cb3749b342bdd444944ce7f77a054478ace96623_1920.jpg';
         break;
     }
 
